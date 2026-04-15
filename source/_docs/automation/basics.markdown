@@ -3,39 +3,39 @@ title: "Understanding automations"
 description: "A breakdown of what an automation consists of."
 ---
 
-All {% term automations %} are made up of a {% term trigger %} and an {% term action %}. Optionally combined with a {% term condition %}. Take for example the automation:
+All {% term automations %} are made of at least a {% term trigger %} and an {% term action %}. Optionally combined with a {% term condition %}. Take for example the automation:
 
-> When Paulus arrives home and it is after sunset: Turn the lights on in the living room.
+> When Paulus entered home and if the sun after sunset, then do: turn the lights on in the living room.
 
 ## Parts of an automation
 
 We can break up the previous automation example into the following three parts:
 
 ```text
-(trigger)    When Paulus arrives home
-(condition)  and it is after sunset:
-(action)     Turn the lights on in the living room
+(trigger part)    When Paulus entered home
+(condition part)  And if the sun after sunset
+(action part)     Then do: turn on the lights in the living room
 ```
 
-Each part has an {% term event %} and a target. The event is what happens and the target is the subject the event is aimed at. The target can be an {% term entity %}, a {% term device %}, a {% term service %} or a group of them. You can see examples in the following sections.
+Each part has a target. The target can be an {% term entity %}, a {% term device %}, a {% term service %} or a group of them. You can see examples in the following sections.
 
-### Trigger
+### Trigger part
 
-The [trigger](/docs/automation/trigger/) is the first part of the automation. An automation must have one trigger and can have more than one. A trigger describes an {% term event %}, directed to a target, that should start an automation. In the example of the automation above, the trigger _When Paulus arrives home_ has:
+The [trigger](/docs/automation/trigger/) belongs to the first part of the automation. An automation must have at least one trigger, related to a target. When the trigger part is verified, the automation starts. In the example of the automation above, the trigger part _When Paulus entered home_ has:
 
 - the target: _Paulus_.
-- the event: _arrives home_.
+- the trigger: _entered home_.
 
-A person arriving home can be tracked in Home Assistant using {% term devices %}/{% term sensors %}, that observes the state of Paulus changing from `not_home` to `home`.
+A person entering home can be tracked in Home Assistant using {% term devices %}/{% term sensors %}, that observes the state of Paulus changing from `not_home` to `home`.
 
-### Condition
+### Condition part
 
-The second part of an automation is the [condition](/docs/automation/condition/). Conditions are optional tests that can limit an automation to only work in your specific use cases. A condition will test against the current state of the system. This includes the current time, devices, people and other things like the sun. In this case, we only want to act when the sun has set.
+The second part of an automation has the [condition](/docs/automation/condition/). Conditions are optional tests directed to a target that can limit an automation to only work in specific cases. A condition will be tested against the current state of the system. This includes the current time, devices, people and other things like the sun. In the example of the automation above, the result of the automation will be verified only if the sun has set.
 
-In the example of the automation above, the condition _and it is after sunset_ has:
+The condition part _And if the sun after sunset_ has:
 
-- the implicit target: _time_.
-- the event: _is after sunset_.
+- the target: _sun_.
+- the condition: _sun after sunset_.
 
 {% note %}
 The difference between a trigger and a condition can be confusing as they are very similar.
@@ -48,14 +48,14 @@ Action: Turn lights on
 
 {% endnote %}
 
-### Action
+### Action part
 
-The last part of an automation is the [action](/docs/automation/action/), which will be performed when an automation is triggered and all conditions are met. For example, it can turn a light on, set the temperature on your thermostat or activate a scene. An automation must have an action and can have more than one.
+The last part of an automation has the [action](/docs/automation/action/). The action part will be performed only if the trigger and condition parts are met. The action part can be turn a light on, set the temperature on your thermostat or activate a scene. An automation must have at least one action, related to a target.
 
-In the example of the automation above, the action _Turn the lights on in the living room_ has:
+The action part _Then do: turn on the lights in the living room_ has:
 
 - the target: _lights in the living room_.
-- the event: _turn on_.
+- the action: _turn on_.
 
 ## Exploring the internal state
 
