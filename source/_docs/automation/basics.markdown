@@ -5,71 +5,29 @@ description: "A breakdown of what an automation consists of."
 
 All {% term automations %} are made of at least a {% term trigger %} and an {% term action %}. Optionally combined with a {% term condition %}. Take for example the automation:
 
-> When Paulus entered home and if the sun after sunset, then do: turn the lights on in the living room.
+> When Paulus enters home and it is after sunset, turn on the lights in the living room.
 
 ## Parts of an automation
 
-We can break up the previous automation example into the following three parts:
+The previous automation example has the following three parts:
 
 ```text
-(trigger part)    When Paulus entered home
-(condition part)  And if the sun after sunset
-(action part)     Then do: turn on the lights in the living room
+(trigger part)    When Paulus enters home
+(condition part)  and it is after sunset
+(action part)     turn on the lights in the living room
 ```
-
-Each part has a target. The target can be an {% term entity %}, a {% term device %}, a {% term service %} or a group of them. You can see examples in the following sections.
 
 ### Trigger part
 
-The [trigger](/docs/automation/trigger/) belongs to the first part of the automation. An automation must have at least one trigger, related to a target. When the trigger part is verified, the automation starts. In the example of the automation above, the trigger part _When Paulus entered home_ has:
-
-- the target: _Paulus_.
-- the trigger: _entered home_.
-
-A person entering home can be tracked in Home Assistant using {% term devices %}/{% term sensors %}, that observes the state of Paulus changing from `not_home` to `home`.
+The [trigger](/docs/automation/trigger/) belongs to the first part of the automation. When the trigger part is verified, the automation starts.
 
 ### Condition part
 
-The second part of an automation has the [condition](/docs/automation/condition/). Conditions are optional tests directed to a target that can limit an automation to only work in specific cases. A condition will be tested against the current state of the system. This includes the current time, devices, people and other things like the sun. In the example of the automation above, the result of the automation will be verified only if the sun has set.
-
-The condition part _And if the sun after sunset_ has:
-
-- the target: _sun_.
-- the condition: _sun after sunset_.
-
-{% note %}
-The difference between a trigger and a condition can be confusing as they are very similar.
-
-Triggers require an event to happen for the conditions to be evaluated using current state information.
-
-Event: Arrive home \
-Condition: After Sunset? \
-Action: Turn lights on
-
-{% endnote %}
+The second part of an automation has the [condition](/docs/automation/condition/). If the condition is verified, the action part takes place. In the example of the automation above, the lights in the living room will turn on only if the sun has set.
 
 ### Action part
 
-The last part of an automation has the [action](/docs/automation/action/). The action part will be performed only if the trigger and condition parts are met. The action part can be turn a light on, set the temperature on your thermostat or activate a scene. An automation must have at least one action, related to a target.
-
-The action part _Then do: turn on the lights in the living room_ has:
-
-- the target: _lights in the living room_.
-- the action: _turn on_.
-
-## Exploring the internal state
-
-Automations interact directly with the internal state of Home Assistant, so you'll need to familiarize yourself with it. Home Assistant exposes its current state via the developer tools. These are available at the bottom of the sidebar in the frontend. {% my developer_states title="**Settings** > **Developer tools** > **States**" %} will show all currently available states. An entity can be anything. A light, a switch, a person and even the sun. A state consists of the following parts:
-
-| Name | Description | Example |
-| ---- | ----- | ---- |
-| Entity ID | Unique identifier for the entity. | `light.living_room` |
-| State | The current state of the device. | `off` |
-| Attributes | Extra data related to the device and/or current state. | `brightness` |
-
-State changes can be used as the source of triggers and the current state can be used in conditions.
-
-To explore the available _actions_, open the {% my developer_services title="**Settings** > **Developer tools** > **Actions**" %}. _Actions_ allow changing anything. For example, turn on a light, run a script, or enable a scene. Each _action_ has a domain and a name. For example, the _action_ {% my developer_call_service service="light.turn_on" %} is capable of turning on any light in your system. Parameters can be passed to an _action_ to indicate, for example, which device to activate or which color to use.
+The last part of an automation has the [action](/docs/automation/action/). The action part will be performed only if the trigger and condition parts are met. Some examples of actions are: turn on a light, set the temperature on a thermostat or activate a scene.
 
 ## Creating automations
 
